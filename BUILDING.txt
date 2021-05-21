@@ -1,0 +1,9 @@
+To reproduce the build in a container defined by the attached Dockerfile, run:
+
+```
+./build.sh
+```
+
+At the end of the process this will print the SHA256 checksum of the
+shimx64.efi binary that was just built, as well as copy the file to the current
+directory and verify its checksum against the attached shimx64.efi.sha256 file.
