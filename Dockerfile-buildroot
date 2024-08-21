@@ -1,0 +1,16 @@
+# The purpose of this image is to have a static build environment
+# containing all build dependencies. It should be rebuilt when shim is
+# updated in Endless OS to capture the environment at that time.
+
+FROM docker.io/endlessm/eos:master
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+      build-essential git-buildpackage pristine-tar && \
+    apt-get build-dep -y --no-install-recommends shim && \
+    apt-get clean
+
+LABEL org.opencontainers.image.source=https://github.com/endlessm/shim-review
+LABEL org.opencontainers.image.description="Endless shim-review buildroot image"
+LABEL org.opencontainers.image.licenses=GPL-2.0-or-later

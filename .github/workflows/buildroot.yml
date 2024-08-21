@@ -1,0 +1,28 @@
+name: Buildroot image
+
+on:
+  # This is only run manually since we only want to update the image
+  # when shim is updated and built for Endless OS.
+  workflow_dispatch:
+
+jobs:
+  image:
+    name: Build and publish image
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    env:
+      IMAGE_REPO: ghcr.io/${{ github.repository_owner }}/shim-review-buildroot
+      IMAGE_TAG: endless-shim-x64-20240820
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -f Dockerfile-buildroot -t "$IMAGE_REPO:$IMAGE_TAG" .
+      - name: Registry login
+        run: docker login -u ${{ github.actor }} --password-stdin ghcr.io <<< "${{ secrets.GITHUB_TOKEN }}"
+      - name: Push image
+        run: docker push "$IMAGE_REPO:$IMAGE_TAG"
