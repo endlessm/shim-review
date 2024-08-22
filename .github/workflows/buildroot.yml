@@ -15,7 +15,7 @@ jobs:
 
     env:
       IMAGE_REPO: ghcr.io/${{ github.repository_owner }}/shim-review-buildroot
-      IMAGE_TAG: endless-shim-x64-20240820
+      IMAGE_TAG: endless-shim-x64-20240822
 
     steps:
       - name: Checkout
