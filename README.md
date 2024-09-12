@@ -100,35 +100,21 @@ You can also point to your custom git servers, where the code is hosted.
 *******************************************************************************
 
 https://github.com/endlessm/shim/, branch `endlessm/master`, tag
-`endless/15.8-1_deb12u1endless`. This is used to create a Debian source package
-with the shim tarball generated from the `pristine-tar` branch.
+`endless/15.8-1_deb12u1endless2`. This is used to create a Debian source
+package with the shim tarball generated from the `pristine-tar` branch.
 
 *******************************************************************************
 ### What patches are being applied and why:
 Mention all the external patches and build process modifications, which are used during your building process, that make your shim binary be the exact one that you posted as part of this application.
 *******************************************************************************
 
-We have applied 4 patches:
+We have applied 2 patches:
 
-* [0001-sbat-Add-grub.peimage-2-to-latest-CVE-2024-2312.patch](https://github.com/endlessm/shim/blob/endless/15.8-1_deb12u1endless1/debian/patches/0001-sbat-Add-grub.peimage-2-to-latest-CVE-2024-2312.patch)
-* [0002-sbat-Also-bump-latest-for-grub-4-and-to-todays-date.patch](https://github.com/endlessm/shim/blob/endless/15.8-1_deb12u1endless1/debian/patches/0002-sbat-Also-bump-latest-for-grub-4-and-to-todays-date.patch)
+* [0001-sbat-Add-grub.peimage-2-to-latest-CVE-2024-2312.patch](https://github.com/endlessm/shim/blob/endless/15.8-1_deb12u1endless2/debian/patches/0001-sbat-Add-grub.peimage-2-to-latest-CVE-2024-2312.patch)
+* [0002-sbat-Also-bump-latest-for-grub-4-and-to-todays-date.patch](https://github.com/endlessm/shim/blob/endless/15.8-1_deb12u1endless2/debian/patches/0002-sbat-Also-bump-latest-for-grub-4-and-to-todays-date.patch)
 
 These are backports from upstream added by Debian to provide newer SBAT
 policies in shim.
-
-* [0003-Revert-fallback-work-around-the-issue-of-boot-option.patch](https://github.com/endlessm/shim/blob/endless/15.8-1_deb12u1endless1/debian/patches/0003-Revert-fallback-work-around-the-issue-of-boot-option.patch)
-* [0004-fallback-Clean-up-duplicate-boot-entries.patch](https://github.com/endlessm/shim/blob/endless/15.8-1_deb12u1endless1/debian/patches/0004-fallback-Clean-up-duplicate-boot-entries.patch)
-
-These patches are applied to the fallback program. They have fallback treat
-boot entries with the same label as duplicates, and remove any entries that are
-a duplicate of the entry we are about to create from the CSV file in the
-fallback path. This is necessary for Endless OS because it's only installed by
-writing an image directly to the disk. Since the partition IDs in the image are
-fixed, they're randomized during the first boot, which invalidates the boot
-entry just created by fallback. On the next boot, fallback will create a new
-boot entry with the new ESP partition ID. While some firmware will delete boot
-entries that refer to non-existent partition IDs, some will not and users will
-be left with duplicate Endless OS boot entries.
 
 *******************************************************************************
 ### Do you have the NX bit set in your shim? If so, is your entire boot stack NX-compatible and what testing have you done to ensure such compatibility?

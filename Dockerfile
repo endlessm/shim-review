@@ -3,13 +3,13 @@
 # identical to the one used to build the original shim.
 
 ARG IMAGE_REPO=ghcr.io/endlessm/shim-review-buildroot
-ARG IMAGE_TAG=endless-shim-x64-20240822
+ARG IMAGE_TAG=endless-shim-x64-20240912
 FROM ${IMAGE_REPO}:${IMAGE_TAG}
 
 COPY . /shim-review
 
-ARG GIT_TAG=endless/15.8-1_deb12u1endless1
-ARG PKG_VERSION=15.8-1~deb12u1endless1
+ARG GIT_TAG=endless/15.8-1_deb12u1endless2
+ARG PKG_VERSION=15.8-1~deb12u1endless2
 RUN gbp clone --pristine-tar https://github.com/endlessm/shim.git && \
     cd /shim && \
     git checkout -B endless/master "${GIT_TAG}" && \
