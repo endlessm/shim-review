@@ -7,7 +7,7 @@ FROM docker.io/endlessm/eos:latest
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-      build-essential git-buildpackage pristine-tar && \
+      build-essential git-buildpackage pristine-tar curl && \
     apt-get build-dep -y --no-install-recommends shim && \
     apt-get clean
 
