@@ -2,7 +2,7 @@
 # containing all build dependencies. It should be rebuilt when shim is
 # updated in Endless OS to capture the environment at that time.
 
-FROM docker.io/endlessm/eos:master
+FROM docker.io/endlessm/eos:latest
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
